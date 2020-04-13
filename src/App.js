@@ -1,7 +1,13 @@
 import React from 'react';
 
+import Layout from './components/Layout/Layout';
+
 function App() {
-  return <div>Let&apos;s get started!</div>;
+  return (
+    <Layout>
+      <p>Enjoy your burger!</p>
+    </Layout>
+  );
 }
 
 export default App;
