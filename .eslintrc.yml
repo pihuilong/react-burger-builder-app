@@ -1,8 +1,9 @@
 extends:
-    - airbnb
+    - airbnb-base
     - plugin:jest/recommended
     - prettier
+    - react-app
 env:
   browser: true
-rules:
-  'react/jsx-filename-extension': 'off'
+# rules:
+  # 'react/jsx-filename-extension': 'off'
