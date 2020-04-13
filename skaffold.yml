@@ -1,0 +1,14 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+metadata:
+  name: react-burger
+build:
+  local:
+      useDockerCLI: true
+  artifacts:
+  - image: docker.io/hiram1994/react-burger
+    context: ./
+deploy:
+  kubectl:
+    manifests:
+    - k8s/k8s-*
