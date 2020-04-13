@@ -1,0 +1,20 @@
+sudo: enabled
+services:
+- docker
+language: node_js
+node_js:
+- '12'
+before_install:
+- curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.17.3/bin/linux/amd64/kubectl
+  && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+- curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
+  && chmod +x skaffold && sudo mv skaffold /usr/local/bin/
+install:
+- yarn install
+# script:
+# - yarn test:cvg
+# - bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" # for uploading coverage report to codecov
+after_success:
+- if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+  chmod +x ./scripts/deploy_to_k8s.sh && ./scripts/deploy_to_k8s.sh; else
+  echo "Not merge operation to master branch, skip deploy..."; fi

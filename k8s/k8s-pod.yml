@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-burger-service
+  labels:
+    app: react-burger
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      name: react-burger-port
+  selector:
+    app: react-burger
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-burger-deployment
+  labels:
+    app: react-burger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-burger
+  template:
+    metadata:
+      labels:
+        app: react-burger
+    spec:
+      containers:
+      - name: react-burger-containers
+        image: docker.io/hiram1994/react-burger
+        env:
+          - name: NODE_ENV
+            value: production
+        ports:
+        - containerPort: 3000
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: react-burger
+# spec:
+#   containers:
+#   - name: react-burger
+#     image: docker.io/hiram1994/react-burger
