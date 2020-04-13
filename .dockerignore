@@ -3,3 +3,5 @@
 node_modules
 build
 .env
+scripts
+k8s
