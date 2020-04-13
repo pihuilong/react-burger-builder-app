@@ -11,9 +11,9 @@ before_install:
   && chmod +x skaffold && sudo mv skaffold /usr/local/bin/
 install:
 - yarn install
-script:
-- yarn test:cvg
-- bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" # for uploading coverage report to codecov
+# script:
+# - yarn test:cvg
+# - bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" # for uploading coverage report to codecov
 after_success:
 - if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
   chmod +x ./scripts/deploy_to_k8s.sh && ./scripts/deploy_to_k8s.sh; else
