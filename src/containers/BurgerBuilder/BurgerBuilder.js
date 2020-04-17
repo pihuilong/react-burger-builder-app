@@ -31,11 +31,34 @@ class BurgerBuilder extends Component {
     });
   };
 
+  removeIngredientHandler = (type) => {
+    const updatedIngredient = { ...this.state.ingredients };
+    const oldCount = this.state.ingredients[type];
+    if (oldCount <= 0) {
+      return;
+    }
+    updatedIngredient[type] = oldCount - 1;
+    const newPrice = this.state.totalPrice - INGREDIENT_PRICES[type];
+    this.setState({
+      ingredients: updatedIngredient,
+      totalPrice: newPrice,
+    });
+  };
+
   render() {
+    const btnDisabledInfo = {...this.state.ingredients};
+    // eslint-disable-next-line guard-for-in
+    for(const key in btnDisabledInfo) {
+      btnDisabledInfo[key] = btnDisabledInfo[key] <= 0;
+    }
     return (
       <React.Fragment>
         <Burger ingredients={this.state.ingredients} />
-        <BuildControls ingredientAdded={this.addIngredientHandler} />
+        <BuildControls
+          ingredientAdded={this.addIngredientHandler}
+          ingredientRemoved={this.removeIngredientHandler}
+          disabledInfo={btnDisabledInfo}
+        />
       </React.Fragment>
     );
   }
