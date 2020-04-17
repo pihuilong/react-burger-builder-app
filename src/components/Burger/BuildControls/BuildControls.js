@@ -5,15 +5,21 @@ import BuildControl from './BuildControl/BuildControl';
 
 // NOTE: Temporarily set it here, will remove to state later.
 const controls = [
-  { label: 'Salad', type: 'salad'},
-  { label: 'Bacon', type: 'bacon'},
-  { label: 'Cheese', type: 'cheese'},
-  { label: 'Meat', type: 'meat'},
-]
+  { label: 'Salad', type: 'salad' },
+  { label: 'Bacon', type: 'bacon' },
+  { label: 'Cheese', type: 'cheese' },
+  { label: 'Meat', type: 'meat' },
+];
 
 const BuildControls = (props) => (
   <div className={classes.BuildControls}>
-    {controls.map((ctl) => <BuildControl key={ctl.label} label={ctl.label} />)}
+    {controls.map((ctl) => (
+      <BuildControl
+        key={ctl.label}
+        added={() => props.ingredientAdded(ctl.type)}
+        label={ctl.label}
+      />
+    ))}
   </div>
 );
 
