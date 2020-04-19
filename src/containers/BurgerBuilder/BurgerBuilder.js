@@ -22,6 +22,7 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 4,
     purchasable: false,
+    purchasing: false,
   };
 
   updatePurchaseState = (ingredients) => {
@@ -57,6 +58,10 @@ class BurgerBuilder extends Component {
     this.updatePurchaseState(updatedIngredient);
   };
 
+  purchaseHandler = () => {
+    this.setState({purchasing: true});
+  };
+
   render() {
     const btnDisabledInfo = {...this.state.ingredients};
     // eslint-disable-next-line guard-for-in
@@ -65,7 +70,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <React.Fragment>
-        <Modal>
+        <Modal show={this.state.purchasing}>
           <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
@@ -75,6 +80,7 @@ class BurgerBuilder extends Component {
           disabledInfo={btnDisabledInfo}
           purchasable={this.state.purchasable}
           price={this.state.totalPrice}
+          ordered={this.purchaseHandler}
         />
       </React.Fragment>
     );
