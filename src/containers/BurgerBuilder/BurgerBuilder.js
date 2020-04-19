@@ -29,8 +29,8 @@ class BurgerBuilder extends Component {
     const sum = Object.keys(ingredients)
       .map((igKey) => ingredients[igKey])
       .reduce((total, el) => total + el, 0);
-    this.setState({purchasable: sum > 0});
-  }
+    this.setState({ purchasable: sum > 0 });
+  };
 
   addIngredientHandler = (type) => {
     const updatedIngredient = { ...this.state.ingredients };
@@ -59,23 +59,33 @@ class BurgerBuilder extends Component {
   };
 
   purchaseHandler = () => {
-    this.setState({purchasing: true});
+    this.setState({ purchasing: true });
   };
 
   purchaseCancelHandler = () => {
-    this.setState({purchasing: false})
-  }
+    this.setState({ purchasing: false });
+  };
+
+  purchaseContinueHandler = () => {
+    alert('Mock purchased!');
+  };
 
   render() {
-    const btnDisabledInfo = {...this.state.ingredients};
+    const btnDisabledInfo = { ...this.state.ingredients };
     // eslint-disable-next-line guard-for-in
-    for(const key in btnDisabledInfo) {
+    for (const key in btnDisabledInfo) {
       btnDisabledInfo[key] = btnDisabledInfo[key] <= 0;
     }
     return (
       <React.Fragment>
-        <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-          <OrderSummary ingredients={this.state.ingredients} />
+        <Modal
+          show={this.state.purchasing}
+          modalClosed={this.purchaseCancelHandler}>
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            purchaseCancelled={this.purchaseCancelHandler}
+            purchaseContinued={this.purchaseContinueHandler}
+          />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
