@@ -5,7 +5,7 @@ import logoSrc from '../../assets/images/original.png';
 import classes from './Logo.module.css'
 
 const Logo = (props) => (
-  <div className={classes.Logo}>
+  <div className={classes.Logo} style={{height: props.height}}>
     <img src={logoSrc} alt='HiramBurger' />
   </div>
 );
