@@ -29,7 +29,7 @@ class Layout extends Component {
           closed={this.closeSideDrawerHandler}
         />
         <main className={classes.Content}>
-          <BurgerBuilder />
+          {this.props.children}
         </main>
       </React.Fragment>
     );
