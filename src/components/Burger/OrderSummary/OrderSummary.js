@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '../../UI/Button/Button';
 
@@ -24,5 +25,11 @@ const OrderSummary = (props) => {
     </React.Fragment>
   );
 };
+
+OrderSummary.propTypes = {
+  price: PropTypes.number.isRequired,
+  purchaseCancelled: PropTypes.func.isRequired,
+  purchaseContinued: PropTypes.func.isRequired,
+}
 
 export default OrderSummary;
