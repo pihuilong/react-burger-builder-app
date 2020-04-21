@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import classes from './Layout.module.css';
 
 import BurgerBuilder from '../../containers/BurgerBuilder/BurgerBuilder';
-import Toolbar from '../Navigation/Toolbar/Toolbar';
-import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
 class Layout extends Component {
   state = {
@@ -29,7 +29,7 @@ class Layout extends Component {
           closed={this.closeSideDrawerHandler}
         />
         <main className={classes.Content}>
-          <BurgerBuilder />
+          {this.props.children}
         </main>
       </React.Fragment>
     );
